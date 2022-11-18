@@ -2,9 +2,9 @@ import { Box, Button, Flex, Input } from '@chakra-ui/react'
 import { FC, useState } from 'react'
 
 import NextImage from 'next/image'
-import { auth } from '../lib/mutations'
 import { useRouter } from 'next/router'
 import { useSWRConfig } from 'swr'
+import { auth } from '../lib/mutations'
 
 const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')

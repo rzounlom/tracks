@@ -20,6 +20,7 @@ import {
 
 import NextImage from 'next/image'
 import NextLink from 'next/link'
+import { usePlayist } from '../lib/hooks'
 
 const navMenu = [
   {
@@ -52,9 +53,12 @@ const musicMenu = [
   },
 ]
 
-const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
+// const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
 
 const Sidebar = () => {
+  // get playsits
+  const { playlists } = usePlayist()
+  console.log({ playlists })
   return (
     <Box
       width="100%"
@@ -100,24 +104,24 @@ const Sidebar = () => {
       </Box>
       <Divider color="gray.800" marginTop="5px" />
       <Box height="66%" overflowY="auto" paddingY="20px">
-        {/* <List spaceing={2}>
-            {playlists.map((playlist) => (
-              <ListItem paddingX="20px" key={playlist.id}>
-                <LinkBox>
-                  <NextLink
-                    href={{
-                      pathname: '/playlist/[id]',
-                      query: { id: playlist.id },
-                    }}
-                    passHref
-                  >
-                    <LinkOverlay>{playlist.name}</LinkOverlay>
-                  </NextLink>
-                </LinkBox>
-              </ListItem>
-            ))}
-          </List> */}
         <List spaceing={2}>
+          {playlists.map((playlist) => (
+            <ListItem paddingX="20px" key={playlist.id}>
+              <LinkBox>
+                <NextLink
+                  href={{
+                    pathname: '/playlist/[id]',
+                    query: { id: playlist.id },
+                  }}
+                  passHref
+                >
+                  <LinkOverlay>{playlist.name}</LinkOverlay>
+                </NextLink>
+              </LinkBox>
+            </ListItem>
+          ))}
+        </List>
+        {/* <List spaceing={2}>
           {playlists.map((playlist, i) => (
             <ListItem paddingX="20px" key={playlist}>
               <LinkBox>
@@ -133,7 +137,7 @@ const Sidebar = () => {
               </LinkBox>
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Box>
     </Box>
   )
